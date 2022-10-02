@@ -94,8 +94,9 @@ class Home extends React.Component<object, HomeState> {
                     type="number"
                     label="Кол-во столбиков"
                     defaultValue={columnsCount}
-                    InputProps={{ inputProps: { min: 1, max: 5 } }}
+                    InputProps={{ inputProps: { min: 1, max: 6 } }}
                     onChange={this.onChangeColumnsCount}
+                    className='noprint'
                 />
 
                 <TextField
@@ -107,6 +108,7 @@ class Home extends React.Component<object, HomeState> {
                     label="Кол-во примеров"
                     defaultValue={expressionCount}
                     onChange={this.onChangeExpressionCount}
+                    className='noprint'
                 />
 
                 <div style={{
@@ -125,9 +127,12 @@ class Home extends React.Component<object, HomeState> {
                                 {
                                     toGenerate(expressionCount)
                                         .map((expression: number[], index: number) => (
-                                            <p key={'expression-'.concat(`${index}`)}>
+                                            <span
+                                                key={'expression-'.concat(`${index}`)}
+                                                style={{ fontSize: '12px' }}
+                                            >
                                                 {`${expression.join(' + ')} = `}
-                                            </p>
+                                            </span>
                                         ))
                                 }
                             </div>
