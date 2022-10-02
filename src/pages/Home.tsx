@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
+import isEqual from 'lodash/isEqual';
 // import Todo from '../components/Todo/Todo';
 
 // const Home = () => <Todo />;
@@ -17,12 +18,23 @@ function getRandomInt(max: number) {
 
 function toGenerate(expressionCount: number):any[] {
     let newExpressions: any[] = [];
+    let previousPair: number[] | undefined;
+    let currentPair: number[] | undefined;
     for (let index = 0; index < expressionCount; index += 1) {
-        newExpressions = [
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            ...newExpressions,
-            [getRandomInt(9) + 1, getRandomInt(9) + 1]
-        ];
+        do {
+            const firstNumber = getRandomInt(8) + 2;
+            const secondNumber = getRandomInt(9 - (10 - firstNumber)) + 1 + (10 - firstNumber);
+            currentPair = [firstNumber, secondNumber];
+            if (previousPair && !isEqual(previousPair, currentPair)) {
+                newExpressions = [
+                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+                    ...newExpressions,
+                    currentPair
+                ];
+            }
+        } while (previousPair && isEqual(previousPair, currentPair));
+
+        previousPair = currentPair;
     }
 
     return newExpressions;
