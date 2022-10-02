@@ -14,7 +14,7 @@ const NavBar = () => (
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          create-react-app supercharged
+          Сгенерировать столбиков?
         </Typography>
       </Toolbar>
     </AppBar>
